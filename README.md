@@ -1,7 +1,4 @@
-Certainly! Here's a sample `README.md` file for your GitHub repository [namdinh2008/job-hive](https://github.com/namdinh2008/job-hive). This template is designed to provide a clear overview of your project, its features, and how to get started. You can customize it further to fit the specific details of your application.
-
 ---
-
 # Job Hive
 
 **Job Hive** is a collaborative job board platform that connects job seekers with employers. Built with modern web technologies, it offers a seamless experience for posting and discovering job opportunities.
