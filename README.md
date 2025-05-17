@@ -1,4 +1,6 @@
+Here's a sample `README.md` file for repository [namdinh2008/job-hive](https://github.com/namdinh2008/job-hive).
 ---
+
 # Job Hive
 
 **Job Hive** is a collaborative job board platform that connects job seekers with employers. Built with modern web technologies, it offers a seamless experience for posting and discovering job opportunities.
