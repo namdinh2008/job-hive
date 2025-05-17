@@ -47,7 +47,6 @@ export default function JobDetailPage({ params }: { params: { id: string } }) {
   })
 
   useEffect(() => {
-    // Load saved jobs from localStorage
     const savedJobsFromStorage = localStorage.getItem("savedJobs")
     if (savedJobsFromStorage) {
       setSavedJobs(JSON.parse(savedJobsFromStorage))

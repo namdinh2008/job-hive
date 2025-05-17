@@ -37,14 +37,12 @@ export default function Home() {
   }>({})
   const [sortBy, setSortBy] = useState<"date" | "salary" | "relevance">("relevance")
 
-  // Load saved jobs from localStorage on component mount
   useEffect(() => {
     const savedJobsFromStorage = localStorage.getItem("savedJobs")
     if (savedJobsFromStorage) {
       setSavedJobs(JSON.parse(savedJobsFromStorage))
     }
 
-    // Initialize filters from URL params
     const category = searchParams.get("category") as JobCategory | null
     const experienceLevel = searchParams.get("experience") as ExperienceLevel | null
     const jobType = searchParams.get("type") as JobType | null
@@ -60,39 +58,31 @@ export default function Home() {
 
     setFilters(initialFilters)
 
-    // Initialize sort from URL params
     const sort = searchParams.get("sort") as "date" | "salary" | "relevance" | null
     if (sort) setSortBy(sort)
 
-    // Apply initial filters and sort
     applyFiltersAndSort(initialFilters, sort || "relevance", searchParams.get("q") || "")
   }, [])
 
-  // Apply filters and sort to jobs
   const applyFiltersAndSort = (currentFilters: typeof filters, currentSortBy: typeof sortBy, currentQuery: string) => {
     let filteredJobs = mockJobs
 
-    // Apply search query if exists
     if (currentQuery) {
       filteredJobs = searchJobs(currentQuery)
     }
 
-    // Apply filters if any
     if (Object.keys(currentFilters).length > 0) {
       filteredJobs = filterJobs(filteredJobs, currentFilters)
     }
 
-    // Apply sorting
     filteredJobs = sortJobs(filteredJobs, currentSortBy)
 
     setJobs(filteredJobs)
   }
 
-  // Handle search
   const handleSearch = (query: string) => {
     setSearchQuery(query)
 
-    // Update URL
     const params = new URLSearchParams(searchParams.toString())
     if (query) {
       params.set("q", query)
@@ -104,7 +94,6 @@ export default function Home() {
     applyFiltersAndSort(filters, sortBy, query)
   }
 
-  // Handle category change
   const handleCategoryChange = (category: JobCategory | "all") => {
     setActiveCategory(category)
 
@@ -117,7 +106,6 @@ export default function Home() {
 
     setFilters(newFilters)
 
-    // Update URL
     const params = new URLSearchParams(searchParams.toString())
     if (category !== "all") {
       params.set("category", category)
@@ -129,11 +117,9 @@ export default function Home() {
     applyFiltersAndSort(newFilters, sortBy, searchQuery)
   }
 
-  // Handle filter change
   const handleFilterChange = (newFilters: typeof filters) => {
     setFilters(newFilters)
 
-    // Update URL
     const params = new URLSearchParams(searchParams.toString())
     Object.entries(newFilters).forEach(([key, value]) => {
       if (value) {
@@ -143,7 +129,6 @@ export default function Home() {
       }
     })
 
-    // Remove any filter params that aren't in newFilters
     const filterKeys = ["category", "experienceLevel", "jobType", "location", "locationType"]
     filterKeys.forEach((key) => {
       if (!newFilters[key as keyof typeof newFilters]) {
@@ -156,11 +141,9 @@ export default function Home() {
     applyFiltersAndSort(newFilters, sortBy, searchQuery)
   }
 
-  // Handle sort change
   const handleSortChange = (newSortBy: typeof sortBy) => {
     setSortBy(newSortBy)
 
-    // Update URL
     const params = new URLSearchParams(searchParams.toString())
     if (newSortBy !== "relevance") {
       params.set("sort", newSortBy)
@@ -172,7 +155,6 @@ export default function Home() {
     applyFiltersAndSort(filters, newSortBy, searchQuery)
   }
 
-  // Toggle save job
   const toggleSaveJob = (jobId: string) => {
     let updatedSavedJobs
 

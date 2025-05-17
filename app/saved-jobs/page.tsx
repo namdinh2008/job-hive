@@ -13,7 +13,7 @@ export default function SavedJobsPage() {
   const [savedJobsData, setSavedJobsData] = useState(mockJobs.filter((job) => savedJobs.includes(job.id)))
 
   useEffect(() => {
-    // Load saved jobs from localStorage
+
     const savedJobsFromStorage = localStorage.getItem("savedJobs")
     if (savedJobsFromStorage) {
       const parsedSavedJobs = JSON.parse(savedJobsFromStorage)
@@ -22,7 +22,6 @@ export default function SavedJobsPage() {
     }
   }, [])
 
-  // Toggle save job
   const toggleSaveJob = (jobId: string) => {
     const updatedSavedJobs = savedJobs.filter((id) => id !== jobId)
     setSavedJobs(updatedSavedJobs)
