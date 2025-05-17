@@ -1,4 +1,4 @@
-Here's a sample `README.md` file for repository [namdinh2008/job-hive](https://github.com/namdinh2008/job-hive).
+Here's a `README.md` file for repository [namdinh2008/job-hive](https://github.com/namdinh2008/job-hive).
 ---
 
 # Job Hive
@@ -97,10 +97,6 @@ Contributions are welcome! Please follow these steps:
 3. Commit your changes: `git commit -m 'Add some feature'`.
 4. Push to the branch: `git push origin feature/your-feature-name`.
 5. Open a pull request.
-
-Please ensure your code adheres to the project's coding standards and includes appropriate tests.
-
-## 📄 License
 
 This project is licensed under the [MIT License](LICENSE).
 
