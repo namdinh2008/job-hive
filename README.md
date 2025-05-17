@@ -1,6 +1,3 @@
-Here's a `README.md` file for repository [namdinh2008/job-hive](https://github.com/namdinh2008/job-hive).
----
-
 # Job Hive
 
 **Job Hive** is a collaborative job board platform that connects job seekers with employers. Built with modern web technologies, it offers a seamless experience for posting and discovering job opportunities.
@@ -97,9 +94,3 @@ Contributions are welcome! Please follow these steps:
 3. Commit your changes: `git commit -m 'Add some feature'`.
 4. Push to the branch: `git push origin feature/your-feature-name`.
 5. Open a pull request.
-
-This project is licensed under the [MIT License](LICENSE).
-
----
-
-Feel free to modify this `README.md` to better fit the specifics of your project. If you need assistance with any part of this setup or have further questions, don't hesitate to ask!
