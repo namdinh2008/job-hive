@@ -1,5 +1,5 @@
 "use client"
-
+import * as React from "react"
 import { Badge } from "@/components/ui/badge"
 
 import { useState } from "react"
@@ -100,7 +100,7 @@ export default function FilterPanel({ onFilter, onSort, activeFilters, activeSor
                 )}
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="w-full sm:max-w-md">
+            <SheetContent side="left" className="w-full sm:max-w-md overflow-y-auto max-h-screen">
               <SheetHeader>
                 <SheetTitle>Filters</SheetTitle>
               </SheetHeader>

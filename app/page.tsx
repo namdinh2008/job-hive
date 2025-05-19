@@ -17,6 +17,7 @@ import {
 import JobCard from "@/components/job-card"
 import SearchBar from "@/components/search-bar"
 import FilterPanel from "@/components/filter-panel"
+import { Button } from "@/components/ui/button"
 
 export default function Home() {
   const searchParams = useSearchParams()
@@ -36,6 +37,17 @@ export default function Home() {
     locationType?: LocationType
   }>({})
   const [sortBy, setSortBy] = useState<"date" | "salary" | "relevance">("relevance")
+  const [currentPage, setCurrentPage] = useState(1)
+  const JOBS_PER_PAGE = 9
+
+  // Calculate paginated jobs
+  const paginatedJobs = jobs.slice((currentPage - 1) * JOBS_PER_PAGE, currentPage * JOBS_PER_PAGE)
+  const totalPages = Math.ceil(jobs.length / JOBS_PER_PAGE)
+
+  // Reset page to 1 when jobs, filters, search, or category changes
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [jobs, filters, searchQuery, activeCategory])
 
   useEffect(() => {
     const savedJobsFromStorage = localStorage.getItem("savedJobs")
@@ -78,6 +90,7 @@ export default function Home() {
     filteredJobs = sortJobs(filteredJobs, currentSortBy)
 
     setJobs(filteredJobs)
+    setCurrentPage(1) // Reset to first page on filter/search/category change
   }
 
   const handleSearch = (query: string) => {
@@ -214,11 +227,43 @@ export default function Home() {
 
             <TabsContent value="all" className="mt-0">
               {jobs.length > 0 ? (
-                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                  {jobs.map((job) => (
-                    <JobCard key={job.id} job={job} onSave={toggleSaveJob} isSaved={savedJobs.includes(job.id)} />
-                  ))}
-                </div>
+                <>
+                  <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                    {paginatedJobs.map((job) => (
+                      <JobCard key={job.id} job={job} onSave={toggleSaveJob} isSaved={savedJobs.includes(job.id)} />
+                    ))}
+                  </div>
+                  {totalPages > 1 && (
+                    <div className="flex justify-center mt-8 gap-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                        disabled={currentPage === 1}
+                      >
+                        Prev
+                      </Button>
+                      {Array.from({ length: totalPages }, (_, i) => (
+                        <Button
+                          key={i + 1}
+                          variant={currentPage === i + 1 ? "default" : "outline"}
+                          size="sm"
+                          onClick={() => setCurrentPage(i + 1)}
+                        >
+                          {i + 1}
+                        </Button>
+                      ))}
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                        disabled={currentPage === totalPages}
+                      >
+                        Next
+                      </Button>
+                    </div>
+                  )}
+                </>
               ) : (
                 <div className="flex flex-col items-center justify-center py-12 text-center">
                   <h3 className="text-lg font-medium">No jobs found</h3>
@@ -229,26 +274,61 @@ export default function Home() {
               )}
             </TabsContent>
 
-            {jobCategories.map((category) => (
-              <TabsContent key={category.id} value={category.id} className="mt-0">
-                {jobs.filter((job) => job.category === category.id).length > 0 ? (
-                  <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                    {jobs
-                      .filter((job) => job.category === category.id)
-                      .map((job) => (
-                        <JobCard key={job.id} job={job} onSave={toggleSaveJob} isSaved={savedJobs.includes(job.id)} />
-                      ))}
-                  </div>
-                ) : (
-                  <div className="flex flex-col items-center justify-center py-12 text-center">
-                    <h3 className="text-lg font-medium">No jobs found in {category.name}</h3>
-                    <p className="text-muted-foreground mt-1">
-                      Try adjusting your search or filters to find what you're looking for.
-                    </p>
-                  </div>
-                )}
-              </TabsContent>
-            ))}
+            {jobCategories.map((category) => {
+              const categoryJobs = jobs.filter((job) => job.category === category.id)
+              const categoryTotalPages = Math.ceil(categoryJobs.length / JOBS_PER_PAGE)
+              const categoryPaginatedJobs = categoryJobs.slice((currentPage - 1) * JOBS_PER_PAGE, currentPage * JOBS_PER_PAGE)
+              return (
+                <TabsContent key={category.id} value={category.id} className="mt-0">
+                  {categoryJobs.length > 0 ? (
+                    <>
+                      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                        {categoryPaginatedJobs.map((job) => (
+                          <JobCard key={job.id} job={job} onSave={toggleSaveJob} isSaved={savedJobs.includes(job.id)} />
+                        ))}
+                      </div>
+                      {categoryTotalPages > 1 && (
+                        <div className="flex justify-center mt-8 gap-2">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                            disabled={currentPage === 1}
+                          >
+                            Prev
+                          </Button>
+                          {Array.from({ length: categoryTotalPages }, (_, i) => (
+                            <Button
+                              key={i + 1}
+                              variant={currentPage === i + 1 ? "default" : "outline"}
+                              size="sm"
+                              onClick={() => setCurrentPage(i + 1)}
+                            >
+                              {i + 1}
+                            </Button>
+                          ))}
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => setCurrentPage((p) => Math.min(categoryTotalPages, p + 1))}
+                            disabled={currentPage === categoryTotalPages}
+                          >
+                            Next
+                          </Button>
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    <div className="flex flex-col items-center justify-center py-12 text-center">
+                      <h3 className="text-lg font-medium">No jobs found in {category.name}</h3>
+                      <p className="text-muted-foreground mt-1">
+                        Try adjusting your search or filters to find what you're looking for.
+                      </p>
+                    </div>
+                  )}
+                </TabsContent>
+              )
+            })}
           </Tabs>
         </div>
       </div>
