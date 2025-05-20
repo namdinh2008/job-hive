@@ -2,10 +2,13 @@
 
 import { useState, useEffect } from "react"
 import { useSearchParams, useRouter } from "next/navigation"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Tabs, TabsContent, TabsTrigger } from "@/components/ui/tabs"
 import {
   mockJobs,
   jobCategories,
+  experienceLevels,
+  jobTypes,
+  locationTypes,
   searchJobs,
   filterJobs,
   sortJobs,
@@ -16,8 +19,18 @@ import {
 } from "@/lib/data"
 import JobCard from "@/components/job-card"
 import SearchBar from "@/components/search-bar"
-import FilterPanel from "@/components/filter-panel"
 import { Button } from "@/components/ui/button"
+import { Checkbox } from "@/components/ui/checkbox"
+import { Label } from "@/components/ui/label"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+
+interface Filters {
+  category?: string[]
+  experienceLevel?: string[]
+  jobType?: string[]
+  locationType?: string[]
+  location?: string
+}
 
 export default function Home() {
   const searchParams = useSearchParams()
@@ -26,16 +39,7 @@ export default function Home() {
   const [jobs, setJobs] = useState(mockJobs)
   const [savedJobs, setSavedJobs] = useState<string[]>([])
   const [searchQuery, setSearchQuery] = useState(searchParams.get("q") || "")
-  const [activeCategory, setActiveCategory] = useState<JobCategory | "all">(
-    (searchParams.get("category") as JobCategory) || "all",
-  )
-  const [filters, setFilters] = useState<{
-    category?: JobCategory
-    experienceLevel?: ExperienceLevel
-    jobType?: JobType
-    location?: string
-    locationType?: LocationType
-  }>({})
+  const [filters, setFilters] = useState<Filters>({})
   const [sortBy, setSortBy] = useState<"date" | "salary" | "relevance">("relevance")
   const [currentPage, setCurrentPage] = useState(1)
   const JOBS_PER_PAGE = 9
@@ -47,7 +51,7 @@ export default function Home() {
   // Reset page to 1 when jobs, filters, search, or category changes
   useEffect(() => {
     setCurrentPage(1)
-  }, [jobs, filters, searchQuery, activeCategory])
+  }, [jobs, filters, searchQuery])
 
   useEffect(() => {
     const savedJobsFromStorage = localStorage.getItem("savedJobs")
@@ -55,117 +59,40 @@ export default function Home() {
       setSavedJobs(JSON.parse(savedJobsFromStorage))
     }
 
-    const category = searchParams.get("category") as JobCategory | null
-    const experienceLevel = searchParams.get("experience") as ExperienceLevel | null
-    const jobType = searchParams.get("type") as JobType | null
-    const location = searchParams.get("location")
-    const locationType = searchParams.get("locationType") as LocationType | null
-
-    const initialFilters: typeof filters = {}
-    if (category) initialFilters.category = category
-    if (experienceLevel) initialFilters.experienceLevel = experienceLevel
-    if (jobType) initialFilters.jobType = jobType
-    if (location) initialFilters.location = location
-    if (locationType) initialFilters.locationType = locationType
-
-    setFilters(initialFilters)
-
-    const sort = searchParams.get("sort") as "date" | "salary" | "relevance" | null
-    if (sort) setSortBy(sort)
-
-    applyFiltersAndSort(initialFilters, sort || "relevance", searchParams.get("q") || "")
+    // No need to parse filters from URL for this simplified version
+    setFilters({})
+    setSortBy("relevance")
+    setSearchQuery("")
+    setJobs(mockJobs)
   }, [])
 
-  const applyFiltersAndSort = (currentFilters: typeof filters, currentSortBy: typeof sortBy, currentQuery: string) => {
+  useEffect(() => {
     let filteredJobs = mockJobs
-
-    if (currentQuery) {
-      filteredJobs = searchJobs(currentQuery)
+    if (searchQuery) {
+      filteredJobs = searchJobs(searchQuery)
     }
-
-    if (Object.keys(currentFilters).length > 0) {
-      filteredJobs = filterJobs(filteredJobs, currentFilters)
+    if (Object.keys(filters).length > 0) {
+      filteredJobs = filterJobs(filteredJobs, filters)
     }
-
-    filteredJobs = sortJobs(filteredJobs, currentSortBy)
-
+    filteredJobs = sortJobs(filteredJobs, sortBy)
     setJobs(filteredJobs)
-    setCurrentPage(1) // Reset to first page on filter/search/category change
-  }
+    setCurrentPage(1)
+  }, [filters, sortBy, searchQuery])
 
   const handleSearch = (query: string) => {
     setSearchQuery(query)
-
-    const params = new URLSearchParams(searchParams.toString())
-    if (query) {
-      params.set("q", query)
-    } else {
-      params.delete("q")
-    }
-    router.push(`/?${params.toString()}`)
-
-    applyFiltersAndSort(filters, sortBy, query)
   }
 
-  const handleCategoryChange = (category: JobCategory | "all") => {
-    setActiveCategory(category)
-
-    const newFilters = { ...filters }
-    if (category !== "all") {
-      newFilters.category = category
-    } else {
-      delete newFilters.category
-    }
-
-    setFilters(newFilters)
-
-    const params = new URLSearchParams(searchParams.toString())
-    if (category !== "all") {
-      params.set("category", category)
-    } else {
-      params.delete("category")
-    }
-    router.push(`/?${params.toString()}`)
-
-    applyFiltersAndSort(newFilters, sortBy, searchQuery)
-  }
-
-  const handleFilterChange = (newFilters: typeof filters) => {
-    setFilters(newFilters)
-
-    const params = new URLSearchParams(searchParams.toString())
-    Object.entries(newFilters).forEach(([key, value]) => {
-      if (value) {
-        params.set(key, value)
+  const handleMultiSelect = (key: keyof Filters, value: string) => {
+    setFilters((prev) => {
+      const arr = Array.isArray(prev[key]) ? [...prev[key] as string[]] : []
+      if (arr.includes(value)) {
+        const newArr = arr.filter((v) => v !== value)
+        return { ...prev, [key]: newArr.length > 0 ? newArr : undefined }
       } else {
-        params.delete(key)
+        return { ...prev, [key]: [...arr, value] }
       }
     })
-
-    const filterKeys = ["category", "experienceLevel", "jobType", "location", "locationType"]
-    filterKeys.forEach((key) => {
-      if (!newFilters[key as keyof typeof newFilters]) {
-        params.delete(key)
-      }
-    })
-
-    router.push(`/?${params.toString()}`)
-
-    applyFiltersAndSort(newFilters, sortBy, searchQuery)
-  }
-
-  const handleSortChange = (newSortBy: typeof sortBy) => {
-    setSortBy(newSortBy)
-
-    const params = new URLSearchParams(searchParams.toString())
-    if (newSortBy !== "relevance") {
-      params.set("sort", newSortBy)
-    } else {
-      params.delete("sort")
-    }
-    router.push(`/?${params.toString()}`)
-
-    applyFiltersAndSort(filters, newSortBy, searchQuery)
   }
 
   const toggleSaveJob = (jobId: string) => {
@@ -181,6 +108,45 @@ export default function Home() {
     localStorage.setItem("savedJobs", JSON.stringify(updatedSavedJobs))
   }
 
+  // Handler for sort dropdown
+  const handleSortChange = (value: "date" | "salary" | "relevance") => {
+    setSortBy(value)
+  }
+
+  // Handler for location input
+  const handleLocationInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFilters((prev) => ({ ...prev, location: e.target.value || undefined }))
+  }
+
+  // Dropdown UI for each filter
+  const renderDropdown = (
+    label: string,
+    key: keyof Filters,
+    options: { id: string; name: string }[],
+  ) => (
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button variant="outline" className="min-w-[160px] justify-between">
+          {label}
+          <span className="ml-2">▼</span>
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-56">
+        <div className="flex flex-col gap-2">
+          {options.map((opt) => (
+            <Label key={opt.id} className="flex items-center gap-2 cursor-pointer">
+              <Checkbox
+                checked={Array.isArray(filters[key]) ? filters[key]!.includes(opt.id) : false}
+                onCheckedChange={() => handleMultiSelect(key, opt.id)}
+              />
+              {opt.name}
+            </Label>
+          ))}
+        </div>
+      </PopoverContent>
+    </Popover>
+  )
+
   return (
     <div className="container py-6 md:py-10">
       <div className="space-y-6">
@@ -192,39 +158,81 @@ export default function Home() {
         </div>
 
         <div className="space-y-6">
-          <SearchBar onSearch={handleSearch} initialQuery={searchQuery} />
-
-          <FilterPanel
-            onFilter={handleFilterChange}
-            onSort={handleSortChange}
-            activeFilters={filters}
-            activeSort={sortBy}
+          {/* SearchBar now filters as user types, no button */}
+          <SearchBar
+            onSearch={(query: string) => setSearchQuery(query)}
+            initialQuery={searchQuery}
           />
 
+          <div className="flex flex-wrap gap-4 mb-4 items-center">
+            {/* Sort Dropdown */}
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button variant="outline" className="min-w-[160px] justify-between">
+                  Sort: {sortBy.charAt(0).toUpperCase() + sortBy.slice(1)}
+                  <span className="ml-2">▼</span>
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-44">
+                <div className="flex flex-col gap-2">
+                  <Label className="flex items-center gap-2 cursor-pointer">
+                    <input
+                      type="radio"
+                      name="sort"
+                      checked={sortBy === "relevance"}
+                      onChange={() => handleSortChange("relevance")}
+                    />
+                    Relevance
+                  </Label>
+                  <Label className="flex items-center gap-2 cursor-pointer">
+                    <input
+                      type="radio"
+                      name="sort"
+                      checked={sortBy === "date"}
+                      onChange={() => handleSortChange("date")}
+                    />
+                    Date (Newest)
+                  </Label>
+                  <Label className="flex items-center gap-2 cursor-pointer">
+                    <input
+                      type="radio"
+                      name="sort"
+                      checked={sortBy === "salary"}
+                      onChange={() => handleSortChange("salary")}
+                    />
+                    Salary (High to Low)
+                  </Label>
+                </div>
+              </PopoverContent>
+            </Popover>
+            {/* Location Input */}
+            <input
+              type="text"
+              placeholder="Search by location..."
+              className="border rounded px-3 py-2 text-sm min-w-[200px]"
+              value={filters.location || ""}
+              onChange={handleLocationInput}
+            />
+            {/* Filter Dropdowns */}
+            {renderDropdown("Job Category", "category", jobCategories)}
+            {renderDropdown("Experience Level", "experienceLevel", experienceLevels)}
+            {renderDropdown("Job Type", "jobType", jobTypes)}
+            {renderDropdown("Work Type", "locationType", locationTypes)}
+            {/* Clear Button */}
+            <Button
+              variant="outline"
+              className="ml-2"
+              onClick={() => setFilters({})}
+            >
+              Clear
+            </Button>
+          </div>
+
           <Tabs
-            defaultValue={activeCategory}
-            value={activeCategory}
-            onValueChange={(value) => handleCategoryChange(value as JobCategory | "all")}
+            defaultValue="all"
+            value="all"
             className="w-full"
           >
-            <TabsList className="w-full h-auto flex flex-wrap justify-start mb-6 bg-transparent gap-2">
-              <TabsTrigger
-                value="all"
-                className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
-              >
-                All Jobs
-              </TabsTrigger>
-              {jobCategories.map((category) => (
-                <TabsTrigger
-                  key={category.id}
-                  value={category.id}
-                  className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
-                >
-                  {category.name}
-                </TabsTrigger>
-              ))}
-            </TabsList>
-
             <TabsContent value="all" className="mt-0">
               {jobs.length > 0 ? (
                 <>

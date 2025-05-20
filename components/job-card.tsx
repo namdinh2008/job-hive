@@ -70,6 +70,10 @@ export default function JobCard({ job, onSave, isSaved }: JobCardProps) {
 
           <div className="mt-4 space-y-2">
             <div className="flex items-center text-sm">
+              <span className="text-muted-foreground">ID:</span>
+              <span className="ml-2">{job.id}</span>
+            </div>
+            <div className="flex items-center text-sm">
               <span className="text-muted-foreground">Location:</span>
               <span className="ml-2">{job.location}</span>
             </div>

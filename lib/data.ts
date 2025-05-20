@@ -91,7 +91,7 @@ export const mockJobs: Job[] = [
     deadline: "2023-06-01",
     companyDescription:
       "TechCorp is a leading technology company specializing in web and mobile application development.",
-    companyLogo: "/placeholder.svg?height=80&width=80",
+    companyLogo: "https://i.pinimg.com/736x/62/3e/08/623e0857a16d805b077b1155cd656489.jpg",
   },
   {
     id: "job-002",
@@ -118,7 +118,7 @@ export const mockJobs: Job[] = [
     deadline: "2023-06-05",
     companyDescription:
       "BrandBoost is a marketing agency that helps businesses grow their brand presence and reach their target audience.",
-    companyLogo: "/placeholder.svg?height=80&width=80",
+    companyLogo: "https://i.pinimg.com/736x/88/85/de/8885de3758607c3f87f26a8b5105eb76.jpg",
   },
   {
     id: "job-003",
@@ -145,7 +145,7 @@ export const mockJobs: Job[] = [
     deadline: "2023-06-10",
     companyDescription:
       "MoneyWise is a financial services company that provides financial planning and investment management services.",
-    companyLogo: "/placeholder.svg?height=80&width=80",
+    companyLogo: "https://cdn-icons-png.flaticon.com/256/10384/10384161.png",
   },
   {
     id: "job-004",
@@ -177,7 +177,7 @@ export const mockJobs: Job[] = [
     deadline: "2023-06-15",
     companyDescription:
       "HealthFirst Hospital is a leading healthcare provider committed to delivering high-quality patient care.",
-    companyLogo: "/placeholder.svg?height=80&width=80",
+    companyLogo: "https://i.pinimg.com/736x/25/dc/47/25dc4724f96ecead1872f71ec2b4c57d.jpg",
   },
   {
     id: "job-005",
@@ -210,7 +210,7 @@ export const mockJobs: Job[] = [
     deadline: "2023-06-20",
     companyDescription:
       "The Government Affairs Office is a government agency that develops and implements public policies.",
-    companyLogo: "/placeholder.svg?height=80&width=80",
+    companyLogo: "https://cdn-icons-png.flaticon.com/256/6715/6715901.png",
   },
   {
     id: "job-006",
@@ -243,7 +243,7 @@ export const mockJobs: Job[] = [
     deadline: "2023-06-25",
     companyDescription:
       "WebSolutions is a web development agency that creates custom websites and web applications for businesses.",
-    companyLogo: "/placeholder.svg?height=80&width=80",
+    companyLogo: "https://cdn-icons-png.flaticon.com/256/1055/1055666.png",
   },
   {
     id: "job-007",
@@ -275,7 +275,7 @@ export const mockJobs: Job[] = [
     postedDate: "2023-05-30",
     deadline: "2023-06-30",
     companyDescription: "DigitalEdge is a digital marketing agency that helps businesses grow their online presence.",
-    companyLogo: "/placeholder.svg?height=80&width=80",
+    companyLogo: "https://cdn-icons-png.flaticon.com/256/1814/1814562.png",
   },
   {
     id: "job-008",
@@ -301,7 +301,7 @@ export const mockJobs: Job[] = [
     deadline: "2023-07-01",
     companyDescription:
       "FinancePro is an accounting firm that provides accounting and tax services to individuals and businesses.",
-    companyLogo: "/placeholder.svg?height=80&width=80",
+    companyLogo: "https://cdn-icons-png.flaticon.com/256/16119/16119891.png",
   },
   {
     id: "job-009",
@@ -327,7 +327,7 @@ export const mockJobs: Job[] = [
     deadline: "2023-07-05",
     companyDescription:
       "CarePoint Clinic is a primary care clinic that provides comprehensive healthcare services to patients.",
-    companyLogo: "/placeholder.svg?height=80&width=80",
+    companyLogo: "https://i.pinimg.com/736x/8f/62/20/8f6220c9aef7c82f41271a90f3867abe.jpg",
   },
   {
     id: "job-010",
@@ -360,7 +360,7 @@ export const mockJobs: Job[] = [
     deadline: "2023-07-10",
     companyDescription:
       "The Government Communications Office is responsible for managing public communications for government agencies.",
-    companyLogo: "/placeholder.svg?height=80&width=80",
+    companyLogo: "https://i.pinimg.com/736x/ca/f4/6e/caf46ee845e170e055876e3e7ff854d5.jpg",
   },
   {
     id: "job-011",
@@ -386,7 +386,7 @@ export const mockJobs: Job[] = [
     postedDate: "2023-06-15",
     deadline: "2023-07-15",
     companyDescription: "DataInsights is a data analytics company that helps businesses make data-driven decisions.",
-    companyLogo: "/placeholder.svg?height=80&width=80",
+    companyLogo: "https://cdn-icons-png.flaticon.com/256/9672/9672242.png",
   },
   {
     id: "job-012",
@@ -419,7 +419,7 @@ export const mockJobs: Job[] = [
     deadline: "2023-07-20",
     companyDescription:
       "ContentCraft is a content marketing agency that helps businesses create and distribute valuable content.",
-    companyLogo: "/placeholder.svg?height=80&width=80",
+    companyLogo: "https://cdn-icons-png.flaticon.com/256/8164/8164154.png",
   },
   {
     id: "job-013",
@@ -444,7 +444,7 @@ export const mockJobs: Job[] = [
     postedDate: "2023-06-18",
     deadline: "2023-07-18",
     companyDescription: "TechCorp is a leading technology company specializing in web and mobile application development.",
-    companyLogo: "/placeholder.svg?height=80&width=80"
+    companyLogo: "https://i.pinimg.com/736x/62/3e/08/623e0857a16d805b077b1155cd656489.jpg"
   },
   {
     id: "job-014",
@@ -469,7 +469,7 @@ export const mockJobs: Job[] = [
     postedDate: "2023-06-19",
     deadline: "2023-07-19",
     companyDescription: "BrandBoost is a marketing agency that helps businesses grow their brand presence and reach their target audience.",
-    companyLogo: "/placeholder.svg?height=80&width=80"
+    companyLogo: "https://i.pinimg.com/736x/88/85/de/8885de3758607c3f87f26a8b5105eb76.jpg"
   },
   {
     id: "job-015",
@@ -494,7 +494,7 @@ export const mockJobs: Job[] = [
     postedDate: "2023-06-20",
     deadline: "2023-07-20",
     companyDescription: "MoneyWise is a financial services company that provides financial planning and investment management services.",
-    companyLogo: "/placeholder.svg?height=80&width=80"
+    companyLogo: "https://cdn-icons-png.flaticon.com/256/10384/10384161.png"
   },
   {
     id: "job-016",
@@ -519,7 +519,7 @@ export const mockJobs: Job[] = [
     postedDate: "2023-06-21",
     deadline: "2023-07-21",
     companyDescription: "HealthFirst Hospital is a leading healthcare provider committed to delivering high-quality patient care.",
-    companyLogo: "/placeholder.svg?height=80&width=80"
+    companyLogo: "https://i.pinimg.com/736x/25/dc/47/25dc4724f96ecead1872f71ec2b4c57d.jpg"
   },
   {
     id: "job-017",
@@ -544,7 +544,7 @@ export const mockJobs: Job[] = [
     postedDate: "2023-06-22",
     deadline: "2023-07-22",
     companyDescription: "The Government Affairs Office is a government agency that develops and implements public policies.",
-    companyLogo: "/placeholder.svg?height=80&width=80"
+    companyLogo: "https://cdn-icons-png.flaticon.com/256/6715/6715901.png"
   },
   {
     id: "job-018",
@@ -569,7 +569,7 @@ export const mockJobs: Job[] = [
     postedDate: "2023-06-23",
     deadline: "2023-07-23",
     companyDescription: "WebSolutions is a web development agency that creates custom websites and web applications for businesses.",
-    companyLogo: "/placeholder.svg?height=80&width=80"
+    companyLogo: "https://cdn-icons-png.flaticon.com/256/1055/1055666.png"
   },
   {
     id: "job-019",
@@ -594,7 +594,7 @@ export const mockJobs: Job[] = [
     postedDate: "2023-06-24",
     deadline: "2023-07-24",
     companyDescription: "DigitalEdge is a digital marketing agency that helps businesses grow their online presence.",
-    companyLogo: "/placeholder.svg?height=80&width=80"
+    companyLogo: "https://cdn-icons-png.flaticon.com/256/1814/1814562.png"
   },
   {
     id: "job-020",
@@ -619,7 +619,7 @@ export const mockJobs: Job[] = [
     postedDate: "2023-06-25",
     deadline: "2023-07-25",
     companyDescription: "FinancePro is an accounting firm that provides accounting and tax services to individuals and businesses.",
-    companyLogo: "/placeholder.svg?height=80&width=80"
+    companyLogo: "https://cdn-icons-png.flaticon.com/256/16119/16119891.png"
   },
   {
     id: "job-021",
@@ -644,7 +644,7 @@ export const mockJobs: Job[] = [
     postedDate: "2023-06-26",
     deadline: "2023-07-26",
     companyDescription: "CarePoint Clinic is a primary care clinic that provides comprehensive healthcare services to patients.",
-    companyLogo: "/placeholder.svg?height=80&width=80"
+    companyLogo: "https://i.pinimg.com/736x/8f/62/20/8f6220c9aef7c82f41271a90f3867abe.jpg"
   },
   {
     id: "job-022",
@@ -669,7 +669,7 @@ export const mockJobs: Job[] = [
     postedDate: "2023-06-27",
     deadline: "2023-07-27",
     companyDescription: "The Government Communications Office is responsible for managing public communications for government agencies.",
-    companyLogo: "/placeholder.svg?height=80&width=80"
+    companyLogo: "https://i.pinimg.com/736x/ca/f4/6e/caf46ee845e170e055876e3e7ff854d5.jpg"
   },
   {
     id: "job-023",
@@ -694,7 +694,7 @@ export const mockJobs: Job[] = [
     postedDate: "2023-06-28",
     deadline: "2023-07-28",
     companyDescription: "DataInsights is a data analytics company that helps businesses make data-driven decisions.",
-    companyLogo: "/placeholder.svg?height=80&width=80"
+    companyLogo: "https://cdn-icons-png.flaticon.com/256/9672/9672242.png"
   },
   {
     id: "job-024",
@@ -719,7 +719,7 @@ export const mockJobs: Job[] = [
     postedDate: "2023-06-29",
     deadline: "2023-07-29",
     companyDescription: "ContentCraft is a content marketing agency that helps businesses create and distribute valuable content.",
-    companyLogo: "/placeholder.svg?height=80&width=80"
+    companyLogo: "https://cdn-icons-png.flaticon.com/256/8164/8164154.png"
   },
   {
     id: "job-025",
@@ -744,7 +744,7 @@ export const mockJobs: Job[] = [
     postedDate: "2023-06-30",
     deadline: "2023-07-30",
     companyDescription: "TechCorp is a leading technology company specializing in web and mobile application development.",
-    companyLogo: "/placeholder.svg?height=80&width=80"
+    companyLogo: "https://i.pinimg.com/736x/62/3e/08/623e0857a16d805b077b1155cd656489.jpg"
   },
   {
     id: "job-026",
@@ -769,7 +769,7 @@ export const mockJobs: Job[] = [
     postedDate: "2023-07-01",
     deadline: "2023-08-01",
     companyDescription: "BrandBoost is a marketing agency that helps businesses grow their brand presence and reach their target audience.",
-    companyLogo: "/placeholder.svg?height=80&width=80"
+    companyLogo: "https://i.pinimg.com/736x/88/85/de/8885de3758607c3f87f26a8b5105eb76.jpg"
   },
   {
     id: "job-027",
@@ -794,7 +794,7 @@ export const mockJobs: Job[] = [
     postedDate: "2023-07-02",
     deadline: "2023-08-02",
     companyDescription: "FinancePro is an accounting firm that provides accounting and tax services to individuals and businesses.",
-    companyLogo: "/placeholder.svg?height=80&width=80"
+    companyLogo: "https://cdn-icons-png.flaticon.com/256/16119/16119891.png"
   },
   {
     id: "job-028",
@@ -819,7 +819,7 @@ export const mockJobs: Job[] = [
     postedDate: "2023-07-03",
     deadline: "2023-08-03",
     companyDescription: "HealthFirst Hospital is a leading healthcare provider committed to delivering high-quality patient care.",
-    companyLogo: "/placeholder.svg?height=80&width=80"
+    companyLogo: "https://i.pinimg.com/736x/25/dc/47/25dc4724f96ecead1872f71ec2b4c57d.jpg"
   },
   {
     id: "job-029",
@@ -844,7 +844,7 @@ export const mockJobs: Job[] = [
     postedDate: "2023-07-04",
     deadline: "2023-08-04",
     companyDescription: "The Government Affairs Office is a government agency that develops and implements public policies.",
-    companyLogo: "/placeholder.svg?height=80&width=80"
+    companyLogo: "https://cdn-icons-png.flaticon.com/256/6715/6715901.png"
   },
   {
     id: "job-030",
@@ -869,7 +869,7 @@ export const mockJobs: Job[] = [
     postedDate: "2023-07-05",
     deadline: "2023-08-05",
     companyDescription: "WebSolutions is a web development agency that creates custom websites and web applications for businesses.",
-    companyLogo: "/placeholder.svg?height=80&width=80"
+    companyLogo: "https://cdn-icons-png.flaticon.com/256/1055/1055666.png"
   }
 ]
 
@@ -894,19 +894,19 @@ export function searchJobs(query: string): Job[] {
 export function filterJobs(
   jobs: Job[],
   filters: {
-    category?: JobCategory
-    experienceLevel?: ExperienceLevel
-    jobType?: JobType
+    category?: string[]
+    experienceLevel?: string[]
+    jobType?: string[]
+    locationType?: string[]
     location?: string
-    locationType?: LocationType
   },
 ): Job[] {
   return jobs.filter((job) => {
-    if (filters.category && job.category !== filters.category) return false
-    if (filters.experienceLevel && job.experienceLevel !== filters.experienceLevel) return false
-    if (filters.jobType && job.jobType !== filters.jobType) return false
+    if (filters.category && filters.category.length > 0 && !filters.category.includes(job.category)) return false
+    if (filters.experienceLevel && filters.experienceLevel.length > 0 && !filters.experienceLevel.includes(job.experienceLevel)) return false
+    if (filters.jobType && filters.jobType.length > 0 && !filters.jobType.includes(job.jobType)) return false
+    if (filters.locationType && filters.locationType.length > 0 && !filters.locationType.includes(job.locationType)) return false
     if (filters.location && !job.location.toLowerCase().includes(filters.location.toLowerCase())) return false
-    if (filters.locationType && job.locationType !== filters.locationType) return false
     return true
   })
 }
