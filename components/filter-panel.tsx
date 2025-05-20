@@ -190,11 +190,11 @@ export default function FilterPanel({ onFilter, onSort, activeFilters, activeSor
                             placeholder="e.g., New York, San Francisco"
                             value={location}
                             onChange={(e) => updateLocation(e.target.value)}
-                            className="mt-1"
+                            className="mt-2 ml-1 w-11/12"
                           />
                         </div>
                         <div className="space-y-2 mt-4">
-                          <p className="text-sm font-medium">Work Type</p>
+                        <p className="text-sm font-medium">Work Type</p>
                           {locationTypes.map((type) => (
                             <div key={type.id} className="flex items-center space-x-2 py-1">
                               <Checkbox

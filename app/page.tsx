@@ -228,11 +228,11 @@ export default function Home() {
             <TabsContent value="all" className="mt-0">
               {jobs.length > 0 ? (
                 <>
-                  <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                     {paginatedJobs.map((job) => (
-                      <JobCard key={job.id} job={job} onSave={toggleSaveJob} isSaved={savedJobs.includes(job.id)} />
-                    ))}
-                  </div>
+                    <JobCard key={job.id} job={job} onSave={toggleSaveJob} isSaved={savedJobs.includes(job.id)} />
+                  ))}
+                </div>
                   {totalPages > 1 && (
                     <div className="flex justify-center mt-8 gap-2">
                       <Button
@@ -279,14 +279,14 @@ export default function Home() {
               const categoryTotalPages = Math.ceil(categoryJobs.length / JOBS_PER_PAGE)
               const categoryPaginatedJobs = categoryJobs.slice((currentPage - 1) * JOBS_PER_PAGE, currentPage * JOBS_PER_PAGE)
               return (
-                <TabsContent key={category.id} value={category.id} className="mt-0">
+              <TabsContent key={category.id} value={category.id} className="mt-0">
                   {categoryJobs.length > 0 ? (
                     <>
-                      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                  <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                         {categoryPaginatedJobs.map((job) => (
-                          <JobCard key={job.id} job={job} onSave={toggleSaveJob} isSaved={savedJobs.includes(job.id)} />
-                        ))}
-                      </div>
+                        <JobCard key={job.id} job={job} onSave={toggleSaveJob} isSaved={savedJobs.includes(job.id)} />
+                      ))}
+                  </div>
                       {categoryTotalPages > 1 && (
                         <div className="flex justify-center mt-8 gap-2">
                           <Button
@@ -318,15 +318,15 @@ export default function Home() {
                         </div>
                       )}
                     </>
-                  ) : (
-                    <div className="flex flex-col items-center justify-center py-12 text-center">
-                      <h3 className="text-lg font-medium">No jobs found in {category.name}</h3>
-                      <p className="text-muted-foreground mt-1">
-                        Try adjusting your search or filters to find what you're looking for.
-                      </p>
-                    </div>
-                  )}
-                </TabsContent>
+                ) : (
+                  <div className="flex flex-col items-center justify-center py-12 text-center">
+                    <h3 className="text-lg font-medium">No jobs found in {category.name}</h3>
+                    <p className="text-muted-foreground mt-1">
+                      Try adjusting your search or filters to find what you're looking for.
+                    </p>
+                  </div>
+                )}
+              </TabsContent>
               )
             })}
           </Tabs>
